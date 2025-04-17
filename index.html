@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>0602 // Entry</title>
+  <style>
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+    #message {
+      margin-top: 20px;
+      color: #ff4444;
+      height: 24px;
+    }
+  </style>
+  <audio id="bgm" src="EchoesofIdentity.mp3" autoplay loop></audio>
+</head>
+<body>
+  <h1 class="fade-in">ENTER THE WORD</h1>
+  <input class="fade-in" type="text" id="answer" placeholder="Enter the word...">
+  <div id="message" class="fade-in"></div>
+
+  <script>
+    const input = document.getElementById("answer");
+    const message = document.getElementById("message");
+    document.getElementById("bgm").volume = 0.4;
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        const val = input.value.trim().toLowerCase();
+        if (val === "welcome") {
+          window.location.href = "decode_braille.html";
+        } else {
+          message.textContent = "Incorrect. Try again.";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

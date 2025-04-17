@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>0602 // Decode</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .braille {
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      white-space: nowrap;
+      text-align: center;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select: none;
+    }
+    input {
+      margin-top: 30px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+    }
+    #message {
+      margin-top: 10px;
+      color: #ff4444;
+      height: 20px;
+    }
+  </style>
+  <audio id="errorSound" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Computer_Error.mp3"></audio>
+  <audio id="keySound" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Typewriter_key.ogg"></audio>
+  <audio id="bgm" src="EchoesofIdentity.mp3" autoplay loop></audio>
+</head>
+<body>
+  <div class="braille" id="brailleText" oncopy="return false" onmousedown="return false" oncontextmenu="return false" onselectstart="return false" style="user-select: none;">
+    ⠽ ⠕ ⠥⠀⠁ ⠗ ⠑ <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+  <input type="text" id="answer" placeholder="Type your answer...">
+  <div id="message"></div>
+  <script>
+    const input = document.getElementById("answer");
+    const message = document.getElementById("message");
+    document.getElementById("bgm").volume = 0.4;
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        const val = input.value.trim().toLowerCase().replace(/\s+/g, '');
+        const encoded = btoa(val);
+        if (encoded === "eW91YXJlY2hvc2Vu") {
+          window.location.href = "ep2_shall_we_begin.html";
+        } else {
+          message.textContent = "Incorrect. Try again.";
+          document.getElementById("errorSound").play();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

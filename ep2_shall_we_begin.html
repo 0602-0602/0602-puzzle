@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>0602 // Ep2</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .ascii {
+      font-size: 1.5rem;
+      white-space: pre;
+      text-align: center;
+      user-select: none;
+    }
+  </style>
+  <audio id="keySound" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Typewriter_key.ogg"></audio>
+  <audio id="bgm" src="EchoesofIdentity.mp3" autoplay loop></audio>
+</head>
+<body>
+  <div class="ascii" id="asciiText"></div>
+
+  <script>
+    const asciiCodes = ['∞E', '!@4', '97', '!@∞', '!@∞', 'E2', '!!9', '!@!', 'E2', '9∞', '!@!', '!@E', '!@5', '!!@', '6E'];
+    const asciiElement = document.getElementById("asciiText");
+
+    let i = 0;
+    function typeAscii() {
+      if (i < asciiCodes.length) {
+        asciiElement.innerHTML += asciiCodes[i] + ' ';
+        if (asciiCodes[i].match(/[a-zA-Z0-9]/)) document.getElementById("keySound").play();
+        i++;
+        setTimeout(typeAscii, 300);
+      }
+    }
+
+    window.onload = function() {
+      document.getElementById("bgm").volume = 0.4;
+      typeAscii();
+    };
+  </script>
+</body>
+</html>
